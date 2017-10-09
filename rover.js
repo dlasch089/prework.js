@@ -6,7 +6,8 @@ var myRover = {
   position: [0, 0],
   newPosition: [0, 0], //To check moves for obstacles
   direction: 'N',
-  moveCommand: "ffffffs" //insert a command with the statements f = forward, b = backwards, r = turn right, l = turn left
+  moveCommand: "ffrffff", //insert a command with the statements f = forward, b = backwards, r = turn right, l = turn left
+  wayFree: true
 };
 
 var mySecondRover = {
@@ -25,7 +26,6 @@ function move(rover) { //moving the rover (code reduction possible?)
       continue;
     }
 
-    //normal moves (without obstacles)
     else if (rover.moveCommand[i] === 'f') {
       gridEndForward(rover);
       goForward(rover);
@@ -36,6 +36,10 @@ function move(rover) { //moving the rover (code reduction possible?)
       turnLeft(rover);
     } else if (rover.moveCommand[i] === 'r') {
       turnRight(rover);
+    }
+
+    if(rover.wayFree === false){
+      break;
     }
   }
 }
@@ -153,6 +157,7 @@ function gridEndBackward(rover) {
 function detectObstacle(rover) {
   if (rover.position[0] === obstaclePosition[0] && rover.position[1] === obstaclePosition[1]) {
     console.log("Obstacle ahead - at position: [" + rover.position + "]");
+    rover.wayFree = false;
   } else if (rover.newPosition[0] != obstaclePosition[0] || rover.newPosition[1] != obstaclePosition[1]) {
     console.log("New Rover Position: [" + rover.position + "]"); //prints position after every move
   }
