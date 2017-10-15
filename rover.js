@@ -6,7 +6,7 @@ var myRover = {
   position: [0, 0],
   newPosition: [0, 0], //To check moves for obstacles
   direction: 'N',
-  moveCommand: "ffrffff", //insert a command with the statements f = forward, b = backwards, r = turn right, l = turn left
+  moveCommand: "rrrr", //insert a command with the statements f = forward, b = backwards, r = turn right, l = turn left
   wayFree: true
 };
 
@@ -18,7 +18,7 @@ var mySecondRover = {
 };
 
 function move(rover) { //moving the rover (code reduction possible?)
-  for (var i = 0; i <= rover.moveCommand.length - 1; i++) {
+  for (var i = 0; i <= rover.moveCommand.length; i++) {
 
     //check command validation:
     if (rover.moveCommand[i] != 'f' && rover.moveCommand[i] != 'b' && rover.moveCommand[i] != 'l' && rover.moveCommand[i] != 'r') {
